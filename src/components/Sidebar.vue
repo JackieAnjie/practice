@@ -2,7 +2,14 @@
     <div>
         <h1>Side bar</h1>
         <div class=sidebar>
-            <a v-bind:key="item.id" v-for="item in sidebar">{{item.msg}}</a>
+            <div v-bind:key="item.title" v-for="item in sidebar">
+                <a v-on:click="expand(item)">
+                {{item.title}}
+                </a>
+                <a v-if="item.clicked">
+                    <a v-bind:key="subitem.title" v-for="subitem in item.suboption" v-on:click="showPage(subitem.title)">{{subitem.title}}</a>
+                </a>
+            </div>
         </div>
     </div>
 </template>
@@ -14,18 +21,56 @@ export default {
         return {
             sidebar: [
                 {
-                    id: 1,
-                    msg:"Option 1"
+                    clicked: false,
+                    title:"Option 1",
+                    suboption: [
+                        {
+                            title:"Option 1a"
+                        },
+                        {
+                            title:"Option 1b"
+                        }
+                    ]
                 },
                 {
-                    id:2,
-                    msg:"Option 2"
+                    clicked: false,
+                    title:"Option 2",
+                    suboption: [
+                        {
+                            title:"Option 2a"
+                        }
+                    ]
                 },
                 {
-                    id: 3,
-                    msg:"Option 3"
+                    clicked:false,
+                    title:"Option 3",
+                    suboption: [
+                        {
+                            title:"Option 3a"
+                        },
+                        {
+                            title:"Option 3b"
+                        },
+                        {
+                            title:"Option 3c"
+                        }
+                    ]
                 }
             ]
+        }
+    },
+
+    methods: {
+        expand: function(item) {
+            if (item.clicked) {
+                item.clicked = false
+            } else {
+                item.clicked = true
+            }
+        },
+
+        showPage: function(option) {
+            alert("you clicked " + option)
         }
     }
 }
@@ -38,6 +83,10 @@ a {
     font-size: 25px;
     color: #818181;
     display: block;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
 }
 
 .sidebar {
