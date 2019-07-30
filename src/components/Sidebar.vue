@@ -4,7 +4,8 @@
         <div class=sidebar>
             <div v-bind:key="item.title" v-for="item in sidebar">
                 <a v-on:click="expand(item)">
-                {{item.title}}
+                    <a v-if="item.clicked">&#x2BC6; {{item.title}} </a>
+                    <a v-else>&#x2BC8; {{item.title}} </a>
                 </a>
                 <a v-if="item.clicked">
                     <a v-bind:key="subitem.title" v-for="subitem in item.suboption" v-on:click="showPage(subitem.title)">{{subitem.title}}</a>
@@ -78,7 +79,7 @@ export default {
 
 <style scoped>
 a {
-    padding: 6px 8px 6px 16px;
+    padding: 6px 8px 6px 6px;
     text-decoration: none;
     font-size: 25px;
     color: #818181;
@@ -89,9 +90,13 @@ a {
   color: #f1f1f1;
 }
 
+.active {
+    color: #f1f1f1;
+}
+
 .sidebar {
     height: 100%;
-    width: 160px;
+    width: 11%;
     position: fixed;
     z-index: 1;
     top: 0;

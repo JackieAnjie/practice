@@ -1,16 +1,19 @@
 <template>
   <div id="app">
     <Sidebar/>
+    <Content/>
   </div>
 </template>
 
 <script>
 import Sidebar from './components/Sidebar';
+import Content from './components/Content';
 
 export default {
   name: 'app',
   components: {
-    Sidebar
+    Sidebar,
+    Content
   }
 }
 </script>
