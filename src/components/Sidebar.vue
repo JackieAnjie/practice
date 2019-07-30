@@ -2,13 +2,13 @@
     <div>
         <h1>Side bar</h1>
         <div class=sidebar>
-            <div v-bind:key="item.title" v-for="item in sidebar">
+            <div v-bind:key="item.title" v-for="item in categories">
                 <a v-on:click="expand(item)">
-                    <a v-if="item.clicked">&#x2BC6; {{item.title}} </a>
-                    <a v-else>&#x2BC8; {{item.title}} </a>
+                    <a v-if="item.clicked">&#x2BC6; {{item.title}}</a>
+                    <a v-else> &#x2BC8; {{item.title}}</a>
                 </a>
                 <a v-if="item.clicked">
-                    <a v-bind:key="subitem.title" v-for="subitem in item.suboption" v-on:click="showPage(subitem.title)">{{subitem.title}}</a>
+                    <a class="suboption" v-bind:key="subitem.title" v-for="subitem in item.suboption" v-on:click="showPage(subitem.title)">{{subitem.title}}</a>
                 </a>
             </div>
         </div>
@@ -20,7 +20,7 @@ export default {
     name:"Sidebar",
     data() {
         return {
-            sidebar: [
+            categories: [
                 {
                     clicked: false,
                     title:"Option 1",
@@ -86,17 +86,19 @@ a {
     display: block;
 }
 
-.sidebar a:hover {
+.sidebar a:hover, 
+.active {
   color: #f1f1f1;
 }
 
-.active {
-    color: #f1f1f1;
+.suboption {
+    font-size: 16px;
+    margin-left: 33px;
 }
 
 .sidebar {
     height: 100%;
-    width: 11%;
+    width: 160px;
     position: fixed;
     z-index: 1;
     top: 0;

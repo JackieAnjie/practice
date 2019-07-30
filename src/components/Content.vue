@@ -6,6 +6,7 @@
 
 <script>
 export default {
+    name:"Content",
     data () {
         return {
             title: "Title",
@@ -19,6 +20,6 @@ export default {
 
 <style scoped>
 div {
-    margin-left:15%;
+    margin-left:180px;
 }
 </style>
