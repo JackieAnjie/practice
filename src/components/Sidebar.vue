@@ -2,7 +2,7 @@
     <div>
         <h1>Side bar</h1>
         <div class=sidebar>
-            <searchBar/>
+            <searchBar v-on:click="showPage"/>
             <div v-bind:key="item.title" v-for="item in categories">
                 <a v-on:click="expand(item)">
                     <a v-if="item.clicked">&#x2BC6; {{item.title}}</a>
@@ -13,19 +13,23 @@
                 </a>
             </div>
         </div>
+        <Content v-bind:selected="selected"/>
     </div>
 </template>
 
 <script>
-import searchBar from './SearchBar'
+import searchBar from './SearchBar';
+import Content from './Content';
 
 export default {
     name:"Sidebar",
     components: {
-        searchBar
+        searchBar,
+        Content
     },
     data() {
         return {
+            selected: "Pick an option!",
             categories: [
                 {
                     clicked: false,
@@ -77,7 +81,7 @@ export default {
         },
 
         showPage: function(option) {
-            alert("you clicked " + option)
+            this.selected = option
         }
     }
 }

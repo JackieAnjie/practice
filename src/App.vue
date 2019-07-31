@@ -7,13 +7,11 @@
 
 <script>
 import Sidebar from './components/Sidebar';
-import Content from './components/Content';
 
 export default {
   name: 'app',
   components: {
-    Sidebar,
-    Content
+    Sidebar
   }
 }
 </script>

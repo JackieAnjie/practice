@@ -1,7 +1,7 @@
 <template>
     <div>
         <input type="text" v-model="search" placeholder="search box"/>
-        <div v-if="this.search != ''">
+        <div v-if="this.search">
             <div v-if="filteredLinks.length!=0">
                 <a class="suboption" v-bind:key="option.title" v-for="option in filteredLinks" v-on:click="showPage(option.title)">
                     {{option.title}}
@@ -42,6 +42,11 @@ export default {
             ]
         }
     },
+    methods: {
+        showPage: function(option) {
+            this.$emit('click', option);
+        }
+    },
     computed:{
         filteredLinks: function(){
             return this.options.filter((option)=>{
@@ -52,6 +57,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.suboption {
+    margin: 0 50 0 0;
+}
 </style>
