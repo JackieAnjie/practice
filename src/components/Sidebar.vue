@@ -2,8 +2,8 @@
     <div>
         <h1>Side bar</h1>
         <div class=sidebar>
-            <input type="text" v-model="search" placeholder="search box"/>
-            <div v-bind:key="item.title" v-for="item in filteredLinks">
+            <searchBar/>
+            <div v-bind:key="item.title" v-for="item in categories">
                 <a v-on:click="expand(item)">
                     <a v-if="item.clicked">&#x2BC6; {{item.title}}</a>
                     <a v-else> &#x2BC8; {{item.title}}</a>
@@ -17,11 +17,15 @@
 </template>
 
 <script>
+import searchBar from './SearchBar'
+
 export default {
     name:"Sidebar",
+    components: {
+        searchBar
+    },
     data() {
         return {
-            search:'',
             categories: [
                 {
                     clicked: false,
@@ -75,20 +79,11 @@ export default {
         showPage: function(option) {
             alert("you clicked " + option)
         }
-    },
-
-    computed:{
-        filteredLinks: function(){
-            return this.categories.filter((category)=>{
-                return category.title.match(this.search);
-            });
-        }
     }
-
 }
 </script>
 
-<style scoped>
+<style>
 a {
     padding: 6px 8px 6px 6px;
     text-decoration: none;
